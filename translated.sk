@@ -1,0 +1,11 @@
+int correction0(int n) {
+	if (??) return n;
+	else if (??) return n - 1;
+	else if (??) return n + 1;
+}
+
+harness void main() {
+	int n = correction0(4);
+	assert 1 + 2 + 3 + 4 + n == 15;
+}
+
