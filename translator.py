@@ -51,9 +51,9 @@ def translate_to_sketch(
 
 
 def main():
-    corrections = ["n -> n, n - 1, n + 1"]
-    vars = ["n = 4"]
-    program = "1 + 2 + 3 + 4 + n == 15"
+    corrections = ["n -> n, n - 1, n + 1", "m -> m, 2 * m, 3 * m"]
+    vars = ["n = 4", "m = 4"]
+    program = "1 + 2 + 3 + m + n == 23"
 
     correction_map = map_corrections(corrections)
     assignments = {var.split(" = ")[0]: var.split(" = ")[1] for var in vars}

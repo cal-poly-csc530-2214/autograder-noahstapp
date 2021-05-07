@@ -4,8 +4,15 @@ int correction0(int n) {
 	else if (??) return n + 1;
 }
 
+int correction1(int m) {
+	if (??) return m;
+	else if (??) return 2 * m;
+	else if (??) return 3 * m;
+}
+
 harness void main() {
 	int n = correction0(4);
-	assert 1 + 2 + 3 + 4 + n == 15;
+	int m = correction1(4);
+	assert 1 + 2 + 3 + m + n == 23;
 }
 
