@@ -1,44 +1,14 @@
-//struct MultiType {
-//    int val;
-//    int flag;
-//    bit bval;
-//    MTList lst;
-//}
-
-//struct MTList {
-//    int len;
-//    MultiType[len] lVals;
-//}
-
-//#define INTEGER 0
-//#define LIST 1
-
-int replaceWithPlusMinusOne(int a) {
+bit pointless(int a, int b) {
     if (??) {
-      return a;
+      return false;
     }
   else if (??) {
-      //bit choiceReplaceNumWithMinusOne = true;
-      return a - 1;
-  }
-  else if (??) {
-      //bit choiceReplaceNumWithPlusOne = true;
-      return a + 1;
+      return a == b;
   }
 }
-
 
 harness void main() {
-    int n = replaceWithPlusMinusOne(4);
-    assert 1 + 2 + 3 + 4 + n == 15; 
+    int[5] nums = {0, 1, 2, 3, 4};
+    bit pointless = pointless(nums[0], nums[1]);
+    assert first == 2;
 }
-
-n -> {n, n - 1, n + 1}
-n = 4
-1 + 2 + 3 + 4 + n == 15
-
-n: 4
-
-1 + 2 + 3 + 4 + {4, 3, 5} == 15
-
-

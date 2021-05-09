@@ -1,3 +1,7 @@
+import subprocess
+import re
+
+
 def map_corrections(corrections: list[str]) -> dict[str, str]:
     map = {}
     for correction in corrections:
@@ -50,6 +54,37 @@ def translate_to_sketch(
     return translated
 
 
+def get_edits(assignments: dict[str, str], program: str) -> None:
+    correct_choices = {}
+    funcs = open("translated.cpp", "r").read().split("}\n")
+
+    funcs = [x.strip() for x in funcs]
+
+    for func in funcs:
+        if "correction" in func and "_out" in func:
+            var = re.search("int(.*),", func).group(1).strip()
+            for line in func.split("\n")[1:]:
+                if "_out" in line:
+                    correct_choices[var] = line.split(" = ")[1].replace(";", "").strip()
+    print("Original program:")
+    for var, val in assignments.items():
+        print("\t" + var + " = " + val)
+    print("\t" + program)
+    print("Corrections:")
+    for var, val in correct_choices.items():
+        if var != val:
+            print(
+                "\tThe value of "
+                + var
+                + " should be "
+                + val.replace(var, assignments[var])
+                + " instead of "
+                + assignments[var]
+            )
+
+    return ""
+
+
 def main():
     corrections = ["n -> n, n - 1, n + 1", "m -> m, 2 * m, 3 * m"]
     vars = ["n = 4", "m = 4"]
@@ -63,6 +98,13 @@ def main():
     translated = translate_to_sketch(program, assignments, correction_map)
     with open("translated.sk", "w") as sk_file:
         print(translated, file=sk_file)
+
+    subprocess.run(
+        ["../sketch-1.7.6/sketch-frontend/sketch", "translated.sk", "--fe-output-code"],
+        cwd="./",
+    )
+
+    get_edits(assignments, program)
 
 
 if __name__ == "__main__":
