@@ -93,7 +93,15 @@ def main():
     correction_map = map_corrections(corrections)
     assignments = {var.split(" = ")[0]: var.split(" = ")[1] for var in vars}
     transformed = subst_vars(subst_corrections(program, correction_map), assignments)
-    print(transformed)
+    print(
+        ", ".join('("' + item + '")' for item in corrections)
+        + "\n"
+        + ", ".join(vars)
+        + "\n"
+        + program
+        + " -> "
+        + transformed
+    )
 
     translated = translate_to_sketch(program, assignments, correction_map)
     with open("translated.sk", "w") as sk_file:
